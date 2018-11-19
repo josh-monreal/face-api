@@ -23,6 +23,7 @@ namespace FA.UnitTests.FA.Business
         {
             _faceAPI = new Mock<IFaceAPI>();
             _responseHelper = new Mock<IResponseHelper>();
+            _faceLogic = new FaceLogic(_faceAPI.Object, _responseHelper.Object);
         }
 
         [Test]
