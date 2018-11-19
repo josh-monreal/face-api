@@ -1,5 +1,4 @@
-﻿using ERNI.Software.Net.Extensions;
-using FA.Business.Core;
+﻿using FA.Business.Core;
 using FA.Business.DTOs;
 using FA.Business.DTOs.DetectedFace;
 using FaceDetection;
@@ -247,7 +246,7 @@ namespace FA.UI.Console
                     WriteLine("\n\tKindly choose from the following options:\n");
 
                     foreach (APIOption apiOption in Enum.GetValues(typeof(APIOption)))
-                        WriteLine("\t\t[{0}] {1}", (int)apiOption, apiOption.GetTitle());
+                        WriteLine("\t\t[{0}] {1}", (int)apiOption, apiOption.ToString());
 
                     Write("\n\tOption: ");
                     var option = int.Parse(ReadLine());
