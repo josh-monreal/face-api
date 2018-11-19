@@ -71,10 +71,6 @@
     <Compile Include="Utilities\ResponseHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Data Layer\FA.Data\FA.Data.csproj">
-      <Project>{2E53644C-2D20-4807-B2A2-39BC4ADE2C4D}</Project>
-      <Name>FA.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\External Layer\FA.External\FA.External.csproj">
       <Project>{a486b731-2ebf-4297-8a33-d337466ef514}</Project>
       <Name>FA.External</Name>
