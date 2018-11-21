@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/joshmonreal/face-api/_apis/build/status/Continuous%20Integration)](https://dev.azure.com/joshmonreal/face-api/_build/latest?definitionId=6)
+
 # Project Title
 This project is a proof-of-concept console application that uses Microsoft Cognitive Services - particularly **Face API**.
 
