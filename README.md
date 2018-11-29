@@ -1,6 +1,6 @@
 [![Build Status](https://dev.azure.com/joshmonreal/face-api/_apis/build/status/Continuous%20Integration)](https://dev.azure.com/joshmonreal/face-api/_build/latest?definitionId=6)
 
-# Project Title
+# Face API
 This project is a proof-of-concept console application that uses Microsoft Cognitive Services - particularly **Face API**.
 
 - .NET Framework 4.6.1 - Console application
@@ -9,3 +9,6 @@ This project is a proof-of-concept console application that uses Microsoft Cogni
 - NUnit 3.11.0 - Unit testing framework
 - Moq 4.10.0 - Mocking framework
 - Newtonsoft.Json 11.0.2 - JSON serializer and deserializer
+
+### Prerequisites
+In order to view the source code you should install **Visual Studio** on your computer. You may refer to this [**LINK**](https://visualstudio.microsoft.com/) to download the software. Afterwards, please ensure that you have .NET Framework 4.6.1 or later installed on your machine.
