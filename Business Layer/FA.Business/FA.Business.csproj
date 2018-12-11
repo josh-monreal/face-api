@@ -68,6 +68,7 @@
     <Compile Include="PersonLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Response.cs" />
+    <Compile Include="Utilities\EnumerationExtensions.cs" />
     <Compile Include="Utilities\ResponseHelper.cs" />
   </ItemGroup>
   <ItemGroup>
