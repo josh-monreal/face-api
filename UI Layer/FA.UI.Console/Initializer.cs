@@ -1,6 +1,7 @@
 ﻿using FA.Business.Core;
 using FA.Business.DTOs;
 using FA.Business.DTOs.DetectedFace;
+using FA.Business.Utilities;
 using FaceDetection;
 using System;
 using System.Collections.Generic;
@@ -254,7 +255,7 @@ namespace FA.UI.Console
                     WriteLine("\n\tKindly choose from the following options:\n");
 
                     foreach (APIOption apiOption in Enum.GetValues(typeof(APIOption)))
-                        WriteLine("\t\t[{0}] {1}", (int)apiOption, apiOption.ToString());
+                        WriteLine("\t\t[{0}] {1}", (int)apiOption, apiOption.GetDescription());
 
                     Write("\n\tOption: ");
                     var option = int.Parse(ReadLine());
