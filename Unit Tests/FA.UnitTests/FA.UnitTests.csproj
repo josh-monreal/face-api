@@ -71,6 +71,7 @@
     <Compile Include="FA.Business\PersonGroupLogicTests.cs" />
     <Compile Include="FA.Business\PersonLogicTests.cs" />
     <Compile Include="FA.Business\Utilities\ResponseHelperTests.cs" />
+    <Compile Include="FA.UI.Console\ValidatorsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +89,10 @@
     <ProjectReference Include="..\..\External Layer\FA.External\FA.External.csproj">
       <Project>{A486B731-2EBF-4297-8A33-D337466EF514}</Project>
       <Name>FA.External</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UI Layer\FA.UI.Console\FA.UI.Console.csproj">
+      <Project>{355ADD47-CBD9-44FC-B4AD-43E4CA54E1C3}</Project>
+      <Name>FA.UI.Console</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
