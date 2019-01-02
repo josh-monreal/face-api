@@ -1,6 +1,7 @@
 ﻿using FA.Business.Core;
 using FA.Business.DTOs;
 using FA.Business.DTOs.DetectedFace;
+using FA.Business.Utilities;
 using FaceDetection;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace FA.UI.Console
 
         private void Initialize()
         {
-            SetWindowSize(180, 48);
+            SetWindowSize(200, 50);
 
             var assemblyVersion = Assembly.GetExecutingAssembly()
                 .GetName()
@@ -63,9 +64,11 @@ namespace FA.UI.Console
             WriteLine("\n\tYou have selected the option for creating a person-group.");
             WriteLine("\t\t* Use numbers, lower case letters, '-' and '_'. The maximum length of the personGroupId is 64.");
 
+            var validators = new Validators();
+
             Write("\n\n\tEnter an ID for the group that you wish to create: ");
             string personGroupId = ReadLine();
-            Validators.PersonGroup(personGroupId);
+            validators.PersonGroup(personGroupId);
 
             _taskList.Add(Task.Factory.StartNew(() =>
             {
@@ -89,9 +92,11 @@ namespace FA.UI.Console
         {
             WriteLine("\n\tYou have selected the option for training your person-group.");
 
+            var validators = new Validators();
+
             Write("\n\n\tEnter the ID of the person-group that you would like to train: ");
             string personGroupId = ReadLine();
-            Validators.PersonGroup(personGroupId);
+            validators.PersonGroup(personGroupId);
 
             _taskList.Add(Task.Factory.StartNew(() =>
             {
@@ -116,13 +121,15 @@ namespace FA.UI.Console
             WriteLine("\n\tYou have selected the option for creating a person.");
             WriteLine("\t\t* The maximum length of the person's name is 128.");
 
+            var validators = new Validators();
+
             Write("\n\n\tEnter the person group for which you would like to add the person to: ");
             string personGroupId = ReadLine();
-            Validators.PersonGroup(personGroupId);
+            validators.PersonGroup(personGroupId);
 
             Write("\n\n\tEnter the name of the person that you would like to add: ");
             string personName = ReadLine();
-            Validators.PersonName(personName);
+            validators.PersonName(personName);
 
             _taskList.Add(Task.Factory.StartNew(() =>
             {
@@ -151,17 +158,19 @@ namespace FA.UI.Console
             WriteLine("\n\tYou have selected the option for adding a face data to a person.");
             WriteLine("\t\t* Valid image size is from 1KB to 6MB.");
 
+            var validators = new Validators();
+
             Write("\n\n\tEnter the person group for which you would like to add the face data to: ");
             string personGroupId = ReadLine();
-            Validators.PersonGroup(personGroupId);
+            validators.PersonGroup(personGroupId);
 
             Write("\n\n\tEnter the ID of the person for which you would like to add the face data to: ");
             string personId = ReadLine();
-            Validators.PersonId(personId);
+            validators.Id(personId);
 
             Write("\n\n\tEnter the file path of the image that you would like to add to {0}: ", personId);
             string imagePath = ReadLine();
-            Validators.ImagePath(imagePath);
+            validators.ImagePath(imagePath);
 
             _taskList.Add(Task.Factory.StartNew(() =>
             {
@@ -193,7 +202,7 @@ namespace FA.UI.Console
 
             Write("\n\n\tEnter the path to an image with faces that you wish to analyze: ");
             string imagePath = ReadLine();
-            Validators.ImagePath(imagePath);
+            new Validators().ImagePath(imagePath);
 
             _taskList.Add(Task.Factory.StartNew(() =>
             {
@@ -221,11 +230,15 @@ namespace FA.UI.Console
         {
             WriteLine("\n\tYou have selected the option for identifying a face.");
 
+            var validators = new Validators();
+
             Write("\n\n\tEnter the face ID of the face that you would like to identify: ");
             string faceId = ReadLine();
+            validators.Id(faceId);
 
             Write("\n\n\tEnter the person group ID associated to the face ID: ");
             string personGroupId = ReadLine();
+            validators.PersonGroup(personGroupId);
 
             _taskList.Add(Task.Factory.StartNew(() =>
             {
@@ -246,7 +259,7 @@ namespace FA.UI.Console
                     WriteLine("\n\tKindly choose from the following options:\n");
 
                     foreach (APIOption apiOption in Enum.GetValues(typeof(APIOption)))
-                        WriteLine("\t\t[{0}] {1}", (int)apiOption, apiOption.ToString());
+                        WriteLine("\t\t[{0}] {1}", (int)apiOption, apiOption.GetDescription());
 
                     Write("\n\tOption: ");
                     var option = int.Parse(ReadLine());
