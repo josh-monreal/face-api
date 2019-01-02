@@ -166,7 +166,7 @@ namespace FA.UI.Console
 
             Write("\n\n\tEnter the ID of the person for which you would like to add the face data to: ");
             string personId = ReadLine();
-            validators.PersonId(personId);
+            validators.Id(personId);
 
             Write("\n\n\tEnter the file path of the image that you would like to add to {0}: ", personId);
             string imagePath = ReadLine();
