@@ -45,7 +45,7 @@ namespace FA.UnitTests.FA.UI.Console
         [Test]
         public void PersonId_PersonIdIsValid_IsValidMustBeTrue()
         {
-            _validators.PersonId("defe67aa-b421-40d7-8200-8c7e4ffe5484");
+            _validators.Id("defe67aa-b421-40d7-8200-8c7e4ffe5484");
 
             Assert.That(_validators.IsValid, Is.True);
         }
@@ -53,7 +53,7 @@ namespace FA.UnitTests.FA.UI.Console
         [Test]
         public void PersonId_PersonIdIsInvalid_ThrowInvalidOperationException()
         {
-            Assert.That(() => _validators.PersonId("a"), Throws.InvalidOperationException);
+            Assert.That(() => _validators.Id("a"), Throws.InvalidOperationException);
         }
     }
 }

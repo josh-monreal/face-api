@@ -37,7 +37,7 @@ namespace FaceDetection
                 IsValid = true;
         }
 
-        public void PersonId(string id)
+        public void Id(string id)
         {
             if (!new Regex(@"^[a-z0-9]{8}[-][a-z0-9]{4}[-][a-z0-9]{4}[-][a-z0-9]{4}[-][a-z0-9]{12}$").IsMatch(id))
             {
