@@ -166,7 +166,7 @@ namespace FA.UI.Console
 
             Write("\n\n\tEnter the ID of the person for which you would like to add the face data to: ");
             string personId = ReadLine();
-            validators.PersonId(personId);
+            validators.Id(personId);
 
             Write("\n\n\tEnter the file path of the image that you would like to add to {0}: ", personId);
             string imagePath = ReadLine();
@@ -230,11 +230,15 @@ namespace FA.UI.Console
         {
             WriteLine("\n\tYou have selected the option for identifying a face.");
 
+            var validators = new Validators();
+
             Write("\n\n\tEnter the face ID of the face that you would like to identify: ");
             string faceId = ReadLine();
+            validators.Id(faceId);
 
             Write("\n\n\tEnter the person group ID associated to the face ID: ");
             string personGroupId = ReadLine();
+            validators.PersonGroup(personGroupId);
 
             _taskList.Add(Task.Factory.StartNew(() =>
             {
