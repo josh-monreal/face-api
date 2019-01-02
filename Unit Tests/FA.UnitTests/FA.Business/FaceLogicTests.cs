@@ -83,8 +83,7 @@ namespace FA.UnitTests.FA.Business
                 .Returns(Task.FromResult(new HttpResponseMessage { StatusCode = httpStatusCode, Content = new StringContent("") }));
 
             _responseHelper.Setup(rh => rh.JsonPrettyPrint(
-                    It.IsAny<HttpResponseMessage>(),
-                    It.IsAny<string>()))
+                    It.IsAny<HttpResponseMessage>()))
                 .Returns(string.Empty);
 
             _faceLogic = new FaceLogic(_faceAPI.Object, _responseHelper.Object);
