@@ -45,7 +45,7 @@ namespace FA.Business.Utilities
             return response;
         }
 
-        public string JsonPrettyPrint(HttpResponseMessage result, string successMessage = null)
+        public string JsonPrettyPrint(HttpResponseMessage result)
         {
             var json = result.Content
                         .ReadAsStringAsync()
