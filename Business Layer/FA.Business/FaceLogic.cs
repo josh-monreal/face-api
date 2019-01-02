@@ -52,8 +52,7 @@ namespace FA.Business
                 var result = _faceAPI.Identify(faceIds, personGroupId)
                     .Result;
 
-                return _responseHelper.JsonPrettyPrint(
-                    result, "The faces that you provided have been successfully identified.");
+                return _responseHelper.JsonPrettyPrint(result);
             }
 
             catch (AggregateException aex)
