@@ -35,7 +35,7 @@ namespace FA.UI.Console
 
         private void Initialize()
         {
-            SetWindowSize(180, 48);
+            SetWindowSize(200, 50);
 
             var assemblyVersion = Assembly.GetExecutingAssembly()
                 .GetName()
