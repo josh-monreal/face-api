@@ -5,6 +5,7 @@ using NUnit.Framework;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using static FA.Business.Enumerations;
 
 namespace FA.UnitTests.FA.Business.Utilities
 {
@@ -31,11 +32,47 @@ namespace FA.UnitTests.FA.Business.Utilities
         [Test]
         [TestCase(HttpStatusCode.Accepted)]
         [TestCase(HttpStatusCode.OK)]
-        public void CreateResponse_IsSuccessStatusCodeIsTrueAndTypeIsBoolean_ReturnResponseDataAsTrue(HttpStatusCode httpStatusCode)
+        public void CreateResponse_IsSuccessStatusCodeIsTrue_ErrorResponseShouldBeNull(HttpStatusCode httpStatusCode)
+        {
+            _response = new HttpResponseMessage { StatusCode = httpStatusCode };
+
+            var result = _responseHelper.CreateResponse<bool>(_response);
+
+            Assert.That(result.ErrorResponse, Is.Null);
+        }
+
+        [Test]
+        [TestCase(HttpStatusCode.Accepted)]
+        [TestCase(HttpStatusCode.OK)]
+        public void CreateResponse_IsSuccessStatusCodeIsTrue_ResponseStatusShouldBeSuccessful(HttpStatusCode httpStatusCode)
+        {
+            _response = new HttpResponseMessage { StatusCode = httpStatusCode };
+
+            var result = _responseHelper.CreateResponse<bool>(_response);
+
+            Assert.That(result.Status, Is.EqualTo(Status.Successful));
+        }
+
+        [Test]
+        [TestCase(HttpStatusCode.Accepted)]
+        [TestCase(HttpStatusCode.OK)]
+        public void CreateResponse_IsSuccessStatusCodeIsTrueAndSuccessMessageIsNotNull_ResponseMessageShouldBeTheSecondArgument(HttpStatusCode httpStatusCode)
         {
             _response = new HttpResponseMessage { StatusCode = httpStatusCode };
 
             var result = _responseHelper.CreateResponse<bool>(_response, "a");
+
+            Assert.That(result.Message, Is.EqualTo("a"));
+        }
+
+        [Test]
+        [TestCase(HttpStatusCode.Accepted)]
+        [TestCase(HttpStatusCode.OK)]
+        public void CreateResponse_IsSuccessStatusCodeIsTrueAndTypeIsBoolean_ReturnResponseDataAsTrue(HttpStatusCode httpStatusCode)
+        {
+            _response = new HttpResponseMessage { StatusCode = httpStatusCode };
+
+            var result = _responseHelper.CreateResponse<bool>(_response);
 
             Assert.That(result.Data, Is.True);
         }
@@ -47,11 +84,105 @@ namespace FA.UnitTests.FA.Business.Utilities
         {
             _class = new SampleClass { Id = 1, Name = "Name" };
             var json = JsonConvert.SerializeObject(_class);
-            _response = new HttpResponseMessage { StatusCode = httpStatusCode, Content = new StringContent(json, Encoding.UTF8, "application/json") };
+            _response = new HttpResponseMessage
+            {
+                StatusCode = httpStatusCode,
+                Content = new StringContent(json, Encoding.UTF8, "application/json")
+            };
 
-            var result = _responseHelper.CreateResponse<SampleClass>(_response, "a");
+            var result = _responseHelper.CreateResponse<SampleClass>(_response);
 
             Assert.That(result.Data, Is.TypeOf<SampleClass>());
+        }
+
+        [Test]
+        [TestCase(HttpStatusCode.NotFound)]
+        [TestCase(HttpStatusCode.Conflict)]
+        public void CreateResponse_IsSuccessStatusCodeIsFalse_ErrorResponseShouldNotBeNull(HttpStatusCode httpStatusCode)
+        {
+            _errorResponse = new ErrorResponse
+            {
+                Error = new ResponseMessage { Code = "a", Message = "b" }
+            };
+
+            var json = JsonConvert.SerializeObject(_errorResponse);
+
+            _response = new HttpResponseMessage
+            {
+                StatusCode = httpStatusCode,
+                Content = new StringContent(json, Encoding.UTF8, "application/json")
+            };
+
+            var result = _responseHelper.CreateResponse<bool>(_response);
+
+            Assert.That(result.ErrorResponse, Is.Not.Null);
+        }
+
+        [Test]
+        public void CreateResponse_IsSuccessStatusCodeIsFalseAndStatusCodeIsUnauthorized_ResponseStatusShouldBeUnauthorized()
+        {
+            _errorResponse = new ErrorResponse
+            {
+                Error = new ResponseMessage { Code = "a", Message = "b" }
+            };
+
+            var json = JsonConvert.SerializeObject(_errorResponse);
+
+            _response = new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.Unauthorized,
+                Content = new StringContent(json, Encoding.UTF8, "application/json")
+            };
+
+            var result = _responseHelper.CreateResponse<bool>(_response);
+
+            Assert.That(result.Status, Is.EqualTo(Status.Unauthorized));
+        }
+
+        [Test]
+        [TestCase(HttpStatusCode.NotFound)]
+        [TestCase(HttpStatusCode.Conflict)]
+        public void CreateResponse_IsSuccessStatusCodeIsFalse_ResponseStatusShouldBeUnsuccessful(HttpStatusCode httpStatusCode)
+        {
+            _errorResponse = new ErrorResponse
+            {
+                Error = new ResponseMessage { Code = "a", Message = "b" }
+            };
+
+            var json = JsonConvert.SerializeObject(_errorResponse);
+
+            _response = new HttpResponseMessage
+            {
+                StatusCode = httpStatusCode,
+                Content = new StringContent(json, Encoding.UTF8, "application/json")
+            };
+
+            var result = _responseHelper.CreateResponse<bool>(_response);
+
+            Assert.That(result.Status, Is.EqualTo(Status.Unsuccessful));
+        }
+
+        [Test]
+        [TestCase(HttpStatusCode.NotFound)]
+        [TestCase(HttpStatusCode.Conflict)]
+        public void CreateResponse_IsSuccessStatusCodeIsFalseAndSuccessMessageIsNotNull_ResponseMessageShouldBeTheErrorMessage(HttpStatusCode httpStatusCode)
+        {
+            _errorResponse = new ErrorResponse
+            {
+                Error = new ResponseMessage { Code = "a", Message = "b" }
+            };
+
+            var json = JsonConvert.SerializeObject(_errorResponse);
+
+            _response = new HttpResponseMessage
+            {
+                StatusCode = httpStatusCode,
+                Content = new StringContent(json, Encoding.UTF8, "application/json")
+            };
+
+            var result = _responseHelper.CreateResponse<bool>(_response, "c");
+
+            Assert.That(result.Message, Is.EqualTo("b"));
         }
 
         [Test]
@@ -63,7 +194,7 @@ namespace FA.UnitTests.FA.Business.Utilities
             var json = JsonConvert.SerializeObject(_errorResponse);
             _response = new HttpResponseMessage { StatusCode = httpStatusCode, Content = new StringContent(json, Encoding.UTF8, "application/json") };
 
-            var result = _responseHelper.CreateResponse<bool>(_response, "a");
+            var result = _responseHelper.CreateResponse<bool>(_response);
 
             Assert.That(result.Data, Is.False);
         }
@@ -77,7 +208,7 @@ namespace FA.UnitTests.FA.Business.Utilities
             var json = JsonConvert.SerializeObject(_errorResponse);
             _response = new HttpResponseMessage { StatusCode = httpStatusCode, Content = new StringContent(json, Encoding.UTF8, "application/json") };
 
-            var result = _responseHelper.CreateResponse<SampleClass>(_response, "a");
+            var result = _responseHelper.CreateResponse<SampleClass>(_response);
 
             Assert.That(result.Data, Is.Null);
         }
