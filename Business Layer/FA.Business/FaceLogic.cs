@@ -24,7 +24,7 @@ namespace FA.Business
             try
             {
                 if (string.IsNullOrWhiteSpace(imagePath))
-                    throw new ArgumentNullException("personGroupId", "The person group ID that you entered is invalid");
+                    throw new ArgumentNullException("imagePath", "The image path that you entered is invalid");
 
                 var result = _faceAPI.Detect(imagePath)
                     .Result;
@@ -43,10 +43,14 @@ namespace FA.Business
         {
             try
             {
+                if (faceIds is null)
+                    throw new ArgumentNullException("faceIds", "The face ID that you entered is invalid");
+
+                if (string.IsNullOrWhiteSpace(personGroupId))
+                    throw new ArgumentNullException("personGroupId", "The person group that you entered is invalid");
+
                 var result = _faceAPI.Identify(faceIds, personGroupId)
                     .Result;
-                var str = _responseHelper.JsonPrettyPrint(
-                    result, "The faces that you provided have been successfully identified.");
 
                 return _responseHelper.JsonPrettyPrint(
                     result, "The faces that you provided have been successfully identified.");
