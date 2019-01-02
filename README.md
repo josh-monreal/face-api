@@ -11,4 +11,6 @@ This project is a proof-of-concept console application that uses Microsoft Cogni
 - Newtonsoft.Json 11.0.2 - JSON serializer and deserializer
 
 ### Prerequisites
-In order to view the source code you should install **Visual Studio** on your computer. You may refer to this [**LINK**](https://visualstudio.microsoft.com/) to download the software. Afterwards, please ensure that you have .NET Framework 4.6.1 or later installed on your machine.
+- In order to view the source code you should install **Visual Studio** on your computer. You may refer to this [**LINK**](https://visualstudio.microsoft.com/) to download the software. Afterwards, please ensure that you have .NET Framework 4.6.1 or later installed on your machine.
+
+- You must also have an **API key** in order to use the RESTful APIs of Azure Cognitive Services. To purchase one you may refer to this [**LINK**](https://azure.microsoft.com/en-us/services/cognitive-services/face/). Make sure you already have an Azure account prior to your purchase.
