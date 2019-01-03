@@ -1,17 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using FA.External.Core;
+using Newtonsoft.Json;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
 namespace FA.External
 {
-    public class HttpHelper
+    public class HttpHelper : IHttpHelper
     {
         private readonly string _subscriptionKey;
 
-        public HttpHelper(string subscriptionKey)
+        public HttpHelper()
         {
-            _subscriptionKey = subscriptionKey;
+            _subscriptionKey = APISettings.SUBSCRIPTION_KEY;
         }
 
         public HttpClient GetHttpClient()

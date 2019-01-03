@@ -8,12 +8,12 @@ namespace FA.External.APIs
     public class FaceAPIs : IFaceAPI
     {
         private readonly string _uriBase;
-        private readonly HttpHelper _httpHelper;
+        private readonly IHttpHelper _httpHelper;
 
-        public FaceAPIs()
+        public FaceAPIs(IHttpHelper httpHelper)
         {
             _uriBase = APISettings.URI_BASE;
-            _httpHelper = new HttpHelper(APISettings.SUBSCRIPTION_KEY);
+            _httpHelper = httpHelper;
         }
 
         public async Task<HttpResponseMessage> Detect(string imageFilePath)

@@ -12,7 +12,7 @@ namespace FA.External.APIs
         public PersonGroupAPIs()
         {
             _uriBase = APISettings.URI_BASE;
-            _httpHelper = new HttpHelper(APISettings.SUBSCRIPTION_KEY);
+            _httpHelper = new HttpHelper();
         }
 
         public async Task<HttpResponseMessage> Create(string personGroupId)
