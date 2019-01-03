@@ -72,6 +72,7 @@
     <Compile Include="FA.Business\PersonLogicTests.cs" />
     <Compile Include="FA.Business\Utilities\EnumerationExtensionsTests.cs" />
     <Compile Include="FA.Business\Utilities\ResponseHelperTests.cs" />
+    <Compile Include="FA.External\FaceAPITests.cs" />
     <Compile Include="FA.UI.Console\ValidatorsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -79,9 +80,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FA.External\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\Business Layer\FA.Business\FA.Business.csproj">
       <Project>{FDEABA0C-90AA-4F46-AD26-89B586AE75F0}</Project>
