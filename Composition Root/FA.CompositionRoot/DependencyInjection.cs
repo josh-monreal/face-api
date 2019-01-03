@@ -1,6 +1,7 @@
 ﻿using FA.Business;
 using FA.Business.Core;
 using FA.Business.Utilities;
+using FA.External;
 using FA.External.APIs;
 using FA.External.Core;
 using Unity;
@@ -28,6 +29,7 @@ namespace FA.CompositionRoot
             #endregion
 
             #region External Layer
+            container.RegisterType<IHttpHelper, HttpHelper>();
             container.RegisterType<IPersonGroupAPI, PersonGroupAPIs>();
             container.RegisterType<IPersonAPI, PersonAPIs>();
             container.RegisterType<IFaceAPI, FaceAPIs>();

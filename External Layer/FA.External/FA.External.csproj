@@ -50,6 +50,7 @@
     <Compile Include="APISettings.cs" />
     <Compile Include="APIs\FaceAPIs.cs" />
     <Compile Include="Core\IFaceAPI.cs" />
+    <Compile Include="Core\IHttpHelper.cs" />
     <Compile Include="Core\IPersonAPI.cs" />
     <Compile Include="Core\IPersonGroupAPI.cs" />
     <Compile Include="HttpHelper.cs" />
