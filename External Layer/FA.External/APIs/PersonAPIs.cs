@@ -12,7 +12,7 @@ namespace FA.External.APIs
         public PersonAPIs()
         {
             _uriBase = APISettings.URI_BASE;
-            _httpHelper = new HttpHelper(APISettings.SUBSCRIPTION_KEY);
+            _httpHelper = new HttpHelper();
         }
 
         public async Task<HttpResponseMessage> AddFace(string personGroupId, 
