@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FA.External", "External Lay
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FA.CompositionRoot", "Composition Root\FA.CompositionRoot\FA.CompositionRoot.csproj", "{E8A9913C-2B85-4126-ADE7-7C5158D64A52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FA.UnitTests", "Unit Tests\FA.UnitTests\FA.UnitTests.csproj", "{2A315EA5-1181-4791-813F-D66C48CC044A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6EA80EFB-8CC6-4426-9309-4B5898BCCA96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FA.UnitTests", "Tests\FA.UnitTests\FA.UnitTests.csproj", "{2A315EA5-1181-4791-813F-D66C48CC044A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +44,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2A315EA5-1181-4791-813F-D66C48CC044A} = {6EA80EFB-8CC6-4426-9309-4B5898BCCA96}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9EB3BD77-8F17-4DA0-BF00-1B6B33E46DA5}
