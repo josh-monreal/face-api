@@ -6,18 +6,17 @@ using Moq.Protected;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FA.UnitTests.FA.APIs.External
+namespace FA.UnitTests.FA.External.APIs
 {
     [TestFixture]
     public class FaceAPITests
     {
         private FaceAPIs _api;
-        private Mock<IHttpHelper> _httpHelper;
+        private Mock<IHttpHelper> _helper;
         private Mock<HttpMessageHandler> _messageHandler;
 
         private byte[] _content;
@@ -28,8 +27,6 @@ namespace FA.UnitTests.FA.APIs.External
         [SetUp]
         public void SetUp()
         {
-            _content = new byte[] { };
-
             _messageHandler = new Mock<HttpMessageHandler>(MockBehavior.Strict);
             _messageHandler
                 .Protected()
@@ -37,25 +34,23 @@ namespace FA.UnitTests.FA.APIs.External
                     "SendAsync",
                     ItExpr.IsAny<HttpRequestMessage>(),
                     ItExpr.IsAny<CancellationToken>())
-                .ReturnsAsync(new HttpResponseMessage
-                {
-                    StatusCode = HttpStatusCode.OK,
-                    Content = new StringContent("a")
-                })
+                .ReturnsAsync(new HttpResponseMessage())
                 .Verifiable();
 
-            _httpHelper = new Mock<IHttpHelper>();
-            _httpHelper.Setup(hlpr => hlpr.GetHttpClient())
+            _helper = new Mock<IHttpHelper>();
+            _helper.Setup(hlpr => hlpr.GetHttpClient())
                 .Returns(new HttpClient((_messageHandler.Object)));
         }
 
         [Test]
         public void Detect_WhenCalled_CreatePostRequest()
         {
-            _httpHelper.Setup(hlpr => hlpr.CreateByteArrayContent("a", "b"))
+            _content = new byte[] { };
+
+            _helper.Setup(hlpr => hlpr.CreateByteArrayContent("a", "b"))
                 .Returns(new ByteArrayContent(_content));
 
-            _api = new FaceAPIs(_httpHelper.Object);
+            _api = new FaceAPIs(_helper.Object);
 
             var result = _api.Detect("a");
 
@@ -73,10 +68,11 @@ namespace FA.UnitTests.FA.APIs.External
         {
             _uri =  new Uri(APISettings.URI_BASE + $"detect?returnFaceId=true");
 
-            _httpHelper.Setup(hlpr => hlpr.CreateByteArrayContent("a", "b"))
+            _content = new byte[] { };
+            _helper.Setup(hlpr => hlpr.CreateByteArrayContent("a", "b"))
                 .Returns(new ByteArrayContent(_content));
 
-            _api = new FaceAPIs(_httpHelper.Object);
+            _api = new FaceAPIs(_helper.Object);
 
             var result = _api.Detect("a");
 
@@ -92,10 +88,11 @@ namespace FA.UnitTests.FA.APIs.External
         [Test]
         public void Detect_WhenCalled_RequestMethodShouldBePost()
         {
-            _httpHelper.Setup(hlpr => hlpr.CreateByteArrayContent("a", "b"))
+            _content = new byte[] { };
+            _helper.Setup(hlpr => hlpr.CreateByteArrayContent("a", "b"))
                 .Returns(new ByteArrayContent(_content));
 
-            _api = new FaceAPIs(_httpHelper.Object);
+            _api = new FaceAPIs(_helper.Object);
 
             var result = _api.Detect("a");
 
@@ -111,10 +108,10 @@ namespace FA.UnitTests.FA.APIs.External
         [Test]
         public void Identify_WhenCalled_CreatePostRequest()
         {
-            _httpHelper.Setup(hlpr => hlpr.CreateHttpContent(new List<string> { "a" }, "b"))
+            _helper.Setup(hlpr => hlpr.CreateHttpContent(new List<string> { "a" }, "b"))
                 .Returns(new StringContent("a"));
 
-            _api = new FaceAPIs(_httpHelper.Object);
+            _api = new FaceAPIs(_helper.Object);
 
             var result = _api.Identify(new List<string> { "a" }, "b");
 
@@ -132,10 +129,10 @@ namespace FA.UnitTests.FA.APIs.External
         {
             _uri = new Uri(APISettings.URI_BASE + "identify");
 
-            _httpHelper.Setup(hlpr => hlpr.CreateHttpContent(new List<string> { "a" }, "b"))
+            _helper.Setup(hlpr => hlpr.CreateHttpContent(new List<string> { "a" }, "b"))
                 .Returns(new StringContent("a"));
 
-            _api = new FaceAPIs(_httpHelper.Object);
+            _api = new FaceAPIs(_helper.Object);
 
             var result = _api.Identify(new List<string> { "a" }, "b");
 
@@ -151,10 +148,10 @@ namespace FA.UnitTests.FA.APIs.External
         [Test]
         public void Identify_WhenCalled_RequestMethodShouldBePost()
         {
-            _httpHelper.Setup(hlpr => hlpr.CreateHttpContent(new List<string> { "a" }, "b"))
+            _helper.Setup(hlpr => hlpr.CreateHttpContent(new List<string> { "a" }, "b"))
                     .Returns(new StringContent("a"));
 
-            _api = new FaceAPIs(_httpHelper.Object);
+            _api = new FaceAPIs(_helper.Object);
 
             var result = _api.Identify(new List<string> { "a" }, "b");
 
