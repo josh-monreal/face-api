@@ -72,7 +72,8 @@
     <Compile Include="FA.Business\PersonLogicTests.cs" />
     <Compile Include="FA.Business\Utilities\EnumerationExtensionsTests.cs" />
     <Compile Include="FA.Business\Utilities\ResponseHelperTests.cs" />
-    <Compile Include="FA.External\FaceAPITests.cs" />
+    <Compile Include="FA.External\APIs\FaceAPITests.cs" />
+    <Compile Include="FA.External\HttpHelperTests.cs" />
     <Compile Include="FA.UI.Console\ValidatorsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
