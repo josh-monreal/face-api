@@ -7,12 +7,12 @@ namespace FA.External.APIs
     public class PersonGroupAPIs : IPersonGroupAPI
     {
         private readonly string _uriBase;
-        private readonly HttpHelper _httpHelper;
+        private readonly IHttpHelper _httpHelper;
 
-        public PersonGroupAPIs()
+        public PersonGroupAPIs(IHttpHelper httpHelper)
         {
             _uriBase = APISettings.URI_BASE;
-            _httpHelper = new HttpHelper();
+            _httpHelper = httpHelper;
         }
 
         public async Task<HttpResponseMessage> Create(string personGroupId)
