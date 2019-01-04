@@ -74,6 +74,7 @@
     <Compile Include="FA.Business\Utilities\ResponseHelperTests.cs" />
     <Compile Include="FA.External\APIs\FaceAPITests.cs" />
     <Compile Include="FA.External\APIs\PersonAPITests.cs" />
+    <Compile Include="FA.External\APIs\PersonGroupAPITests.cs" />
     <Compile Include="FA.External\HttpHelperTests.cs" />
     <Compile Include="FA.UI.Console\ValidatorsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
