@@ -11,7 +11,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FA.UnitTests.FA.External
+namespace FA.UnitTests.FA.APIs.External
 {
     [TestFixture]
     public class FaceAPITests
