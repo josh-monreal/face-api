@@ -7,12 +7,12 @@ namespace FA.External.APIs
     public class PersonAPIs : IPersonAPI
     {
         private readonly string _uriBase;
-        private readonly HttpHelper _httpHelper;
+        private readonly IHttpHelper _httpHelper;
 
-        public PersonAPIs()
+        public PersonAPIs(IHttpHelper httpHelper)
         {
             _uriBase = APISettings.URI_BASE;
-            _httpHelper = new HttpHelper();
+            _httpHelper = httpHelper;
         }
 
         public async Task<HttpResponseMessage> AddFace(string personGroupId, 
@@ -25,7 +25,7 @@ namespace FA.External.APIs
 
             var client = _httpHelper.GetHttpClient();
 
-            return await client.PostAsync(uri, content); ;
+            return await client.PostAsync(uri, content);
         }
 
         public async Task<HttpResponseMessage> Create(string personGroupId, string personName)
