@@ -47,7 +47,7 @@
     <Compile Include="..\..\UI Layer\FA.UI.Console\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="APISettings.cs" />
+    <Compile Include="APIConstants.cs" />
     <Compile Include="APIs\FaceAPIs.cs" />
     <Compile Include="Core\IFaceAPI.cs" />
     <Compile Include="Core\IHttpHelper.cs" />

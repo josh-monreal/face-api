@@ -21,7 +21,7 @@ namespace FA.UnitTests.FA.External.APIs
         private byte[] _content;
         private Uri _uri;
 
-        private const int TIMES_CALLED = 1;
+        private const int TimesCalled = 1;
 
         [SetUp]
         public void SetUp()
@@ -56,7 +56,7 @@ namespace FA.UnitTests.FA.External.APIs
                 .Protected()
                 .Verify(
                     "SendAsync",
-                    Times.Exactly(TIMES_CALLED),
+                    Times.Exactly(TimesCalled),
                     ItExpr.IsAny<HttpRequestMessage>(),
                     ItExpr.IsAny<CancellationToken>());
         }
@@ -64,7 +64,7 @@ namespace FA.UnitTests.FA.External.APIs
         [Test]
         public void AddFace_WhenCalled_RequestUriMustBeEqualToExpectedUri()
         {
-            _uri = new Uri(APISettings.URI_BASE + "persongroups/a/persons/b/persistedFaces");
+            _uri = new Uri(APIConstants.UriBase + "persongroups/a/persons/b/persistedFaces");
 
             _content = new byte[] { };
             _helper.Setup(hlpr => hlpr.CreateByteArrayContent("a", "b"))
@@ -78,7 +78,7 @@ namespace FA.UnitTests.FA.External.APIs
                .Protected()
                .Verify(
                    "SendAsync",
-                   Times.Exactly(TIMES_CALLED),
+                   Times.Exactly(TimesCalled),
                    ItExpr.Is<HttpRequestMessage>(req => req.RequestUri == _uri),
                    ItExpr.IsAny<CancellationToken>());
         }
@@ -98,7 +98,7 @@ namespace FA.UnitTests.FA.External.APIs
                .Protected()
                .Verify(
                    "SendAsync",
-                   Times.Exactly(TIMES_CALLED),
+                   Times.Exactly(TimesCalled),
                    ItExpr.Is<HttpRequestMessage>(req => req.Method == HttpMethod.Post),
                    ItExpr.IsAny<CancellationToken>());
         }
@@ -118,7 +118,7 @@ namespace FA.UnitTests.FA.External.APIs
                 .Protected()
                 .Verify(
                     "SendAsync",
-                    Times.Exactly(TIMES_CALLED),
+                    Times.Exactly(TimesCalled),
                     ItExpr.IsAny<HttpRequestMessage>(),
                     ItExpr.IsAny<CancellationToken>());
         }
@@ -126,7 +126,7 @@ namespace FA.UnitTests.FA.External.APIs
         [Test]
         public void Create_WhenCalled_RequestUriMustBeEqualToExpectedUri()
         {
-            _uri = new Uri(APISettings.URI_BASE + "persongroups/a/persons");
+            _uri = new Uri(APIConstants.UriBase + "persongroups/a/persons");
 
             var item = new { Id = 1, Name = "a" };
             _helper.Setup(hlpr => hlpr.CreateHttpContent(item, "a"))
@@ -140,7 +140,7 @@ namespace FA.UnitTests.FA.External.APIs
                 .Protected()
                 .Verify(
                     "SendAsync",
-                    Times.Exactly(TIMES_CALLED),
+                    Times.Exactly(TimesCalled),
                     ItExpr.Is<HttpRequestMessage>(req => req.RequestUri == _uri),
                     ItExpr.IsAny<CancellationToken>());
         }
@@ -160,7 +160,7 @@ namespace FA.UnitTests.FA.External.APIs
                 .Protected()
                 .Verify(
                     "SendAsync",
-                    Times.Exactly(TIMES_CALLED),
+                    Times.Exactly(TimesCalled),
                     ItExpr.Is<HttpRequestMessage>(req => req.Method == HttpMethod.Post),
                     ItExpr.IsAny<CancellationToken>());
         }
