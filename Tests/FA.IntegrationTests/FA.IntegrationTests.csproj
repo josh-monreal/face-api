@@ -57,6 +57,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ParameterConstants.cs" />
+    <Compile Include="Common\HttpResponseMessageExtensions.cs" />
     <Compile Include="PersonGroupAPITests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
