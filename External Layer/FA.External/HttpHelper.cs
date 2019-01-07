@@ -12,7 +12,7 @@ namespace FA.External
 
         public HttpHelper()
         {
-            _subscriptionKey = APISettings.SUBSCRIPTION_KEY;
+            _subscriptionKey = APIConstants.SubscriptionKey;
         }
 
         public HttpClient GetHttpClient()
