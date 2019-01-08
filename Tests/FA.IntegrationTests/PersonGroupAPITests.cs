@@ -75,14 +75,5 @@ namespace FA.IntegrationTests
 
             Assert.That(result.StatusCode, Is.EqualTo(HttpStatusCode.Accepted));
         }
-
-        [Test]
-        public void Train_WhenCalled_ContentShouldBeEmpty()
-        {
-            var result = _api.Train(ParameterConstants.PersonGroupId)
-                .Result;
-
-            Assert.That(result.GetStringContent(), Is.Empty);
-        }
     }
 }
