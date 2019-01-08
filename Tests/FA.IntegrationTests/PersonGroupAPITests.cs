@@ -84,14 +84,5 @@ namespace FA.IntegrationTests
 
             Assert.That(result.GetStringContent(), Is.Empty);
         }
-
-        [Test]
-        public void Train_WhenCalled_ContentTypeShouldBeNull()
-        {
-            var result = _api.Train(ParameterConstants.PersonGroupId)
-                .Result;
-
-            Assert.That(result.GetContentType(), Is.Null);
-        }
     }
 }
