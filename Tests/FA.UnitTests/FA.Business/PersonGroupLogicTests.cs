@@ -1,5 +1,6 @@
 ﻿using FA.Business;
 using FA.Business.Core;
+using FA.Business.DTOs;
 using FA.Business.Models;
 using FA.External.Core;
 using Moq;
@@ -16,6 +17,7 @@ namespace FA.UnitTests.FA.Business
         private Mock<IPersonGroupAPI> _personGroupAPI;
         private Mock<IResponseHelper> _responseHelper;
         private PersonGroupLogic _personGroupLogic;
+        private PersonGroupDto _dto;
 
         [SetUp]
         public void SetUp()
@@ -27,9 +29,10 @@ namespace FA.UnitTests.FA.Business
         [Test]
         public void Create_PersonGroupDoesNotExist_ResponseDataMustBeTrue()
         {
-            _personGroupAPI.Setup(api => api.Create("a"))
+            _personGroupAPI.Setup(api => api.Create("unit-test"))
                 .Returns(Task.FromResult(new HttpResponseMessage { StatusCode = HttpStatusCode.OK }));
-            
+            _dto = new PersonGroupDto { PersonGroupId = "unit-test" };
+
             _responseHelper.Setup(rh => rh.CreateResponse<bool>(
                     It.Is<HttpResponseMessage>(res => res.IsSuccessStatusCode == true), 
                     It.IsAny<string>()))
@@ -37,7 +40,7 @@ namespace FA.UnitTests.FA.Business
 
             _personGroupLogic = new PersonGroupLogic(_personGroupAPI.Object, _responseHelper.Object);
 
-            var result = _personGroupLogic.Create("a");
+            var result = _personGroupLogic.Create(_dto);
 
             Assert.IsTrue((bool)result.Data);
         }
@@ -45,8 +48,9 @@ namespace FA.UnitTests.FA.Business
         [Test]
         public void Create_PersonGroupExists_ResponseDataMustBeFalse()
         {
-            _personGroupAPI.Setup(api => api.Create("a"))
+            _personGroupAPI.Setup(api => api.Create("unit-test"))
                 .Returns(Task.FromResult(new HttpResponseMessage { StatusCode = HttpStatusCode.Conflict }));
+            _dto = new PersonGroupDto { PersonGroupId = "unit-test" };
 
             _responseHelper.Setup(rh => rh.CreateResponse<bool>(
                     It.Is<HttpResponseMessage>(res => res.IsSuccessStatusCode == false),
@@ -55,20 +59,18 @@ namespace FA.UnitTests.FA.Business
 
             _personGroupLogic = new PersonGroupLogic(_personGroupAPI.Object, _responseHelper.Object);
 
-            var result = _personGroupLogic.Create("a");
+            var result = _personGroupLogic.Create(_dto);
 
             Assert.IsFalse((bool)result.Data);
         }
 
         [Test]
-        [TestCase(null)]
-        [TestCase("")]
-        [TestCase(" ")]
-        public void Create_PersonGroupIsNullOrEmpty_ThrowArgumentNullException(string error)
+        public void Create_DtoIsNull_ThrowArgumentNullException()
         {
+            _dto = null;
             _personGroupLogic = new PersonGroupLogic(_personGroupAPI.Object, _responseHelper.Object);
 
-            Assert.That(() => _personGroupLogic.Create(error), Throws.ArgumentNullException);
+            Assert.That(() => _personGroupLogic.Create(_dto), Throws.ArgumentNullException);
         }
 
         [Test]

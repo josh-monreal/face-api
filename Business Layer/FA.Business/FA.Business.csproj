@@ -70,6 +70,7 @@
     <Compile Include="DTOs\IdentifiedPerson\IdentifiedPersonDto.cs" />
     <Compile Include="DTOs\PersistedFaceDto.cs" />
     <Compile Include="DTOs\PersonDto.cs" />
+    <Compile Include="DTOs\PersonGroupDto.cs" />
     <Compile Include="Enumerations.cs" />
     <Compile Include="FaceLogic.cs" />
     <Compile Include="Models\ResponseMessage.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Models\Response.cs" />
     <Compile Include="Utilities\EnumerationExtensions.cs" />
     <Compile Include="Utilities\ResponseHelper.cs" />
+    <Compile Include="Validators\PersonGroupValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\External Layer\FA.External\FA.External.csproj">
