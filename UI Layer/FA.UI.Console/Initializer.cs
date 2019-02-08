@@ -33,18 +33,6 @@ namespace FA.UI.Console
             _taskList = new List<Task>();
         }
 
-        private void Initialize()
-        {
-            SetWindowSize(200, 50);
-
-            var assemblyVersion = Assembly.GetExecutingAssembly()
-                .GetName()
-                .Version
-                .ToString();
-
-            WriteLine("\n\tFaceAPI Application v. {0}", assemblyVersion);
-        }
-
         private void ExecuteAPIOption(int option)
         {
             switch (option)
@@ -65,16 +53,18 @@ namespace FA.UI.Console
             WriteLine("\t\t* Use numbers, lower case letters, '-' and '_'. The maximum length of the personGroupId is 64.");
 
             var validators = new Validators();
+            var personGroupDto = new PersonGroupDto();
 
             Write("\n\n\tEnter an ID for the group that you wish to create: ");
             string personGroupId = ReadLine();
             validators.PersonGroup(personGroupId);
+            personGroupDto.PersonGroupId = personGroupId;
 
             _taskList.Add(Task.Factory.StartNew(() =>
             {
                 try
                 {
-                    var result = _personGroupLogic.Create(personGroupId);
+                    var result = _personGroupLogic.Create(personGroupDto);
                     WriteLine("\t" + result.Message);
                 }
 
@@ -252,10 +242,12 @@ namespace FA.UI.Console
         {
             try
             {
-                Initialize();
+                SetWindowSize(200, 50);
 
                 do
                 {
+                    DisplayApplicationVersion();
+
                     WriteLine("\n\tKindly choose from the following options:\n");
 
                     foreach (APIOption apiOption in Enum.GetValues(typeof(APIOption)))
@@ -291,6 +283,16 @@ namespace FA.UI.Console
                 WriteLine($"\n\tStackTrace: { exception.StackTrace }");
                 ReadLine();
             }
+        }
+
+        private void DisplayApplicationVersion()
+        {
+            var assemblyVersion = Assembly.GetExecutingAssembly()
+                .GetName()
+                .Version
+                .ToString();
+
+            WriteLine($"\n\tFaceAPI Application v{ assemblyVersion }");
         }
     }
 }
