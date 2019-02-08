@@ -66,7 +66,7 @@ namespace FA.UnitTests.FA.External.APIs
         [Test]
         public void Detect_WhenCalled_RequestUriMustBeEqualToExpectedUri()
         {
-            _uri =  new Uri(APIConstants.UriBase + $"detect?returnFaceId=true");
+            _uri =  new Uri(APISettings.UriBase + $"detect?returnFaceId=true");
 
             _content = new byte[] { };
             _helper.Setup(hlpr => hlpr.CreateByteArrayContent("a", "b"))
@@ -127,7 +127,7 @@ namespace FA.UnitTests.FA.External.APIs
         [Test]
         public void Identify_WhenCalled_RequestUriMustBeEqualToExpectedUri()
         {
-            _uri = new Uri(APIConstants.UriBase + "identify");
+            _uri = new Uri(APISettings.UriBase + "identify");
 
             _helper.Setup(hlpr => hlpr.CreateHttpContent(new List<string> { "a" }, "b"))
                 .Returns(new StringContent("a"));
