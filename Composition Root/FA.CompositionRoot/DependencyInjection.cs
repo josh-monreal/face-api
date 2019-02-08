@@ -17,7 +17,7 @@ namespace FA.CompositionRoot
             _container = RegisterDependencies();
         }
 
-        public UnityContainer RegisterDependencies()
+        private UnityContainer RegisterDependencies()
         {
             var container = new UnityContainer();
 
