@@ -24,6 +24,11 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: qetza.replacetokens.replacetokens-task.replacetokens@3
+  displayName: 'Replace tokens in **/App.config'
+  inputs:
+    targetFiles: '**/App.config'
+
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
