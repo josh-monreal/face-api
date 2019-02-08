@@ -1,5 +1,6 @@
 ﻿using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
+using System.Configuration;
 
 namespace FA.External
 {
@@ -10,14 +11,22 @@ namespace FA.External
 
         public APISettings()
         {
-            var client = new KeyVaultClient(
-                new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
+            try
+            {
+                var client = new KeyVaultClient(
+                    new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
 
-            var result = client
-                .GetSecretAsync("https://faceapi.vault.azure.net/secrets/Subscription-Key/f885329076364b719f6e61e69ae263e4")
-                .Result;
+                var result = client
+                    .GetSecretAsync("https://faceapi.vault.azure.net/secrets/Subscription-Key/f885329076364b719f6e61e69ae263e4")
+                    .Result;
 
-            SubscriptionKey = result.Value;
+                SubscriptionKey = result.Value;
+            }
+
+            catch
+            {
+                SubscriptionKey = ConfigurationManager.AppSettings["SubscriptionKey"];
+            }
         }
     }
 }
