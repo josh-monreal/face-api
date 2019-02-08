@@ -64,7 +64,7 @@ namespace FA.UnitTests.FA.External.APIs
         [Test]
         public void AddFace_WhenCalled_RequestUriMustBeEqualToExpectedUri()
         {
-            _uri = new Uri(APIConstants.UriBase + "persongroups/a/persons/b/persistedFaces");
+            _uri = new Uri(APISettings.UriBase + "persongroups/a/persons/b/persistedFaces");
 
             _content = new byte[] { };
             _helper.Setup(hlpr => hlpr.CreateByteArrayContent("a", "b"))
@@ -126,7 +126,7 @@ namespace FA.UnitTests.FA.External.APIs
         [Test]
         public void Create_WhenCalled_RequestUriMustBeEqualToExpectedUri()
         {
-            _uri = new Uri(APIConstants.UriBase + "persongroups/a/persons");
+            _uri = new Uri(APISettings.UriBase + "persongroups/a/persons");
 
             var item = new { Id = 1, Name = "a" };
             _helper.Setup(hlpr => hlpr.CreateHttpContent(item, "a"))

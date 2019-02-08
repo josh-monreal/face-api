@@ -63,7 +63,7 @@ namespace FA.UnitTests.FA.External.APIs
         [Test]
         public void Create_WhenCalled_RequestUriMustBeEqualToExpectedUri()
         {
-            _uri = new Uri(APIConstants.UriBase + "persongroups/a");
+            _uri = new Uri(APISettings.UriBase + "persongroups/a");
 
             var item = new { Id = 1, Name = "a" };
             _helper.Setup(hlpr => hlpr.CreateHttpContent(item, "a"))
@@ -121,7 +121,7 @@ namespace FA.UnitTests.FA.External.APIs
         [Test]
         public void Train_WhenCalled_RequestUriMustBeEqualToExpectedUri()
         {
-            _uri = new Uri(APIConstants.UriBase + "persongroups/a/train");
+            _uri = new Uri(APISettings.UriBase + "persongroups/a/train");
             _api = new PersonGroupAPIs(_helper.Object);
 
             var result = _api.Train("a");
