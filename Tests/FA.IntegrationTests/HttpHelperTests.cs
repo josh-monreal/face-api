@@ -1,7 +1,7 @@
 ﻿using FA.External;
 using NUnit.Framework;
 
-namespace FA.UnitTests.FA.External
+namespace FA.IntegrationTests.FA.External
 {
     [TestFixture]
     public class HttpHelperTests
