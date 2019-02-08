@@ -21,7 +21,7 @@ namespace FA.IntegrationTests
         [OneTimeTearDown]
         public async Task CleanUp()
         {
-            var uri = $"{ APIConstants.UriBase }persongroups/{ ParameterConstants.PersonGroupId }";
+            var uri = $"{ APISettings.UriBase }persongroups/{ ParameterConstants.PersonGroupId }";
             var client = new HttpHelper().GetHttpClient();
 
             await client.DeleteAsync(uri);

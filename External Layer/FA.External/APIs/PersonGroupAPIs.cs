@@ -11,7 +11,7 @@ namespace FA.External.APIs
 
         public PersonGroupAPIs(IHttpHelper httpHelper)
         {
-            _uriBase = APIConstants.UriBase;
+            _uriBase = APISettings.UriBase;
             _httpHelper = httpHelper;
         }
 

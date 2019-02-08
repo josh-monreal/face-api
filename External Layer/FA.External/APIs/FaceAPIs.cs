@@ -12,7 +12,7 @@ namespace FA.External.APIs
 
         public FaceAPIs(IHttpHelper httpHelper)
         {
-            _uriBase = APIConstants.UriBase;
+            _uriBase = APISettings.UriBase;
             _httpHelper = httpHelper;
         }
 
@@ -24,7 +24,7 @@ namespace FA.External.APIs
 
             var client = _httpHelper.GetHttpClient();
 
-            return await client.PostAsync(uri, content);;
+            return await client.PostAsync(uri, content);
         }
 
         public async Task<HttpResponseMessage> Identify(List<string> faceIds, string personGroupId)
