@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{355ADD47-CBD9-44FC-B4AD-43E4CA54E1C3}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>FaceDetection</RootNamespace>
-    <AssemblyName>FaceDetection</AssemblyName>
+    <RootNamespace>FA.UI.Console</RootNamespace>
+    <AssemblyName>FA.UI.Console</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
