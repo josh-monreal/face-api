@@ -17,4 +17,4 @@ This project is a proof-of-concept console application that uses Microsoft Cogni
 
 - This application currently does not contain methods for getting, updating, and deleting items (i.e. person-group, person, and face). These have been created for the meantime in [**Postman**](https://www.getpostman.com/) which can be accessed by clicking on the button below. You may need to install Postman on your computer to use the APIs. Note that you need an API key as well.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4529d7f3b3879c775c27)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/b4c308aee8bad1de1af5)
