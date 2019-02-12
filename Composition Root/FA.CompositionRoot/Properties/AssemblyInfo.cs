@@ -3,11 +3,11 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("FA.CompositionRoot")]
-[assembly: AssemblyDescription("Proof-of-concept application that uses Face API of Microsoft Cognitive Services")]
+[assembly: AssemblyDescription("Proof-of-concept application that uses Face API of Azure Cognitive Services")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ERNI")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("FaceAPI")]
-[assembly: AssemblyCopyright("Copyright © 2018")]
+[assembly: AssemblyCopyright("Copyright © 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
