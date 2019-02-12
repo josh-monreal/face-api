@@ -74,6 +74,15 @@ namespace FA.UnitTests.FA.Business
         }
 
         [Test]
+        public void Create_DtoIsInvalid_ThrowInvalidOperationException()
+        {
+            _dto = new PersonGroupDto { PersonGroupId = "$" };
+            _personGroupLogic = new PersonGroupLogic(_personGroupAPI.Object, _responseHelper.Object);
+
+            Assert.That(() => _personGroupLogic.Create(_dto), Throws.InvalidOperationException);
+        }
+
+        [Test]
         public void Train_PersonGroupDoesNotExist_ResponseDataMustBeFalse()
         {
             _personGroupAPI.Setup(api => api.Train("a"))
