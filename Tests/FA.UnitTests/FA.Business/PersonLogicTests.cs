@@ -77,15 +77,20 @@ namespace FA.UnitTests.FA.Business
         }
 
         [Test]
-        [TestCase(null)]
-        [TestCase("")]
-        [TestCase(" ")]
-        public void Create_PersonNameIsNullOrEmpty_ThrowArgumentNullException(string error)
+        public void Create_DtoIsNull_ThrowArgumentNullException()
         {
-            _dto = new PersonDto { Name = error };
             _personLogic = new PersonLogic(_personAPI.Object, _responseHelper.Object);
 
-            Assert.That(() => _personLogic.Create("a", _dto), Throws.ArgumentNullException);
+            Assert.That(() => _personLogic.Create("a", null), Throws.ArgumentNullException);
+        }
+
+        [Test]
+        public void Create_DtoIsInvalid_ThrowInvalidOperationException()
+        {
+            _dto = new PersonDto { Name = "" };
+            _personLogic = new PersonLogic(_personAPI.Object, _responseHelper.Object);
+
+            Assert.That(() => _personLogic.Create("a", _dto), Throws.InvalidOperationException);
         }
 
         [Test]
