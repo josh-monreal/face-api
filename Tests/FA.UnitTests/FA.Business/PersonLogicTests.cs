@@ -17,6 +17,7 @@ namespace FA.UnitTests.FA.Business
         private Mock<IPersonAPI> _personAPI;
         private Mock<IResponseHelper> _responseHelper;
         private PersonLogic _personLogic;
+        private PersonDto _dto;
 
         [SetUp]
         public void SetUp()
@@ -30,6 +31,7 @@ namespace FA.UnitTests.FA.Business
         {
             _personAPI.Setup(api => api.Create("a", "b"))
                 .Returns(Task.FromResult(new HttpResponseMessage { StatusCode = HttpStatusCode.NotFound }));
+            _dto = new PersonDto { Name = "b" };
 
             _responseHelper.Setup(rh => rh.CreateResponse<PersonDto>(
                     It.Is<HttpResponseMessage>(res => !res.IsSuccessStatusCode),
@@ -38,7 +40,7 @@ namespace FA.UnitTests.FA.Business
 
             _personLogic = new PersonLogic(_personAPI.Object, _responseHelper.Object);
 
-            var result = _personLogic.Create("a", "b");
+            var result = _personLogic.Create("a", _dto);
 
             Assert.That(result.Data, Is.Null);
         }
@@ -48,6 +50,7 @@ namespace FA.UnitTests.FA.Business
         {
             _personAPI.Setup(api => api.Create("a", "b"))
                 .Returns(Task.FromResult(new HttpResponseMessage { StatusCode = HttpStatusCode.OK }));
+            _dto = new PersonDto { Name = "b" };
 
             _responseHelper.Setup(rh => rh.CreateResponse<PersonDto>(
                     It.Is<HttpResponseMessage>(res => res.IsSuccessStatusCode),
@@ -56,7 +59,7 @@ namespace FA.UnitTests.FA.Business
 
             _personLogic = new PersonLogic(_personAPI.Object, _responseHelper.Object);
 
-            var result = _personLogic.Create("a", "b");
+            var result = _personLogic.Create("a", _dto);
 
             Assert.That(((PersonDto)result.Data).PersonId, Is.EqualTo("123"));
         }
@@ -67,9 +70,10 @@ namespace FA.UnitTests.FA.Business
         [TestCase(" ")]
         public void Create_PersonGroupIsNullOrEmpty_ThrowArgumentNullException(string error)
         {
+            _dto = new PersonDto { Name = "a" };
             _personLogic = new PersonLogic(_personAPI.Object, _responseHelper.Object);
 
-            Assert.That(() => _personLogic.Create(error, "a"), Throws.ArgumentNullException);
+            Assert.That(() => _personLogic.Create(error, _dto), Throws.ArgumentNullException);
         }
 
         [Test]
@@ -78,9 +82,10 @@ namespace FA.UnitTests.FA.Business
         [TestCase(" ")]
         public void Create_PersonNameIsNullOrEmpty_ThrowArgumentNullException(string error)
         {
+            _dto = new PersonDto { Name = error };
             _personLogic = new PersonLogic(_personAPI.Object, _responseHelper.Object);
 
-            Assert.That(() => _personLogic.Create("a", error), Throws.ArgumentNullException);
+            Assert.That(() => _personLogic.Create("a", _dto), Throws.ArgumentNullException);
         }
 
         [Test]

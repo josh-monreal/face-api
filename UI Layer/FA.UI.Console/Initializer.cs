@@ -53,12 +53,12 @@ namespace FA.UI.Console
             WriteLine("\t\t* Use numbers, lower case letters, '-' and '_'. The maximum length of the personGroupId is 64.");
 
             var validators = new Validators();
-            var personGroupDto = new PersonGroupDto();
+
 
             Write("\n\n\tEnter an ID for the group that you wish to create: ");
             string personGroupId = ReadLine();
             validators.PersonGroup(personGroupId);
-            personGroupDto.PersonGroupId = personGroupId;
+            var personGroupDto = new PersonGroupDto { PersonGroupId = personGroupId };
 
             _taskList.Add(Task.Factory.StartNew(() =>
             {
@@ -120,12 +120,13 @@ namespace FA.UI.Console
             Write("\n\n\tEnter the name of the person that you would like to add: ");
             string personName = ReadLine();
             validators.PersonName(personName);
+            var dto = new PersonDto { Name = personName };
 
             _taskList.Add(Task.Factory.StartNew(() =>
             {
                 try
                 {
-                    var result = _personLogic.Create(personGroupId, personName);
+                    var result = _personLogic.Create(personGroupId, dto);
                     WriteLine("\t" + result.Message);
 
                     var person = (PersonDto)result.Data;
