@@ -18,21 +18,21 @@ namespace FA.Business
             _responseHelper = responseHelper;
         }
 
-        public Response Create(string personGroupId, string personName)
+        public Response Create(string personGroupId, PersonDto dto)
         {
             try
             {
                 if (string.IsNullOrWhiteSpace(personGroupId))
                     throw new ArgumentNullException("personGroupId", "The person group ID that you entered is invalid");
 
-                if (string.IsNullOrWhiteSpace(personName))
+                if (string.IsNullOrWhiteSpace(dto.Name))
                     throw new ArgumentNullException("personName", "The person name that you entered is invalid");
 
-                var result = _personAPI.Create(personGroupId, personName)
+                var result = _personAPI.Create(personGroupId, dto.Name)
                     .Result;
 
                 return _responseHelper.CreateResponse<PersonDto>(
-                    result, $"'{ personName }' has been successfully created in the '{ personGroupId }' person-group.");
+                    result, $"'{ dto.Name }' has been successfully created in the '{ personGroupId }' person-group.");
             }
 
             catch (AggregateException aex)
