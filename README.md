@@ -1,4 +1,4 @@
-[![Build Status](https://dev.azure.com/joshmonreal/face-api/_apis/build/status/Continuous%20Integration)](https://dev.azure.com/joshmonreal/face-api/_build/latest?definitionId=6)
+[![Build Status](https://dev.azure.com/joshmonreal/face-api/_apis/build/status/Continuous%20Integration%20-%20master?branchName=master)](https://dev.azure.com/joshmonreal/face-api/_build/latest?definitionId=6&branchName=master)
 
 # Face API
 This project is a proof-of-concept console application that uses Microsoft Cognitive Services - particularly **Face API**. The following are the frameworks/technologies used in creating this.
@@ -12,6 +12,7 @@ This project is a proof-of-concept console application that uses Microsoft Cogni
 - Microsoft Azure KeyVault 3.0.3
 - Microsoft Azure Services App Authentication 1.0.3
 
+## Getting Started
 ### Prerequisites
 - In order to view the source code you should install **Visual Studio** on your computer. You may refer to this [**LINK**](https://visualstudio.microsoft.com/) to download the software. Afterwards, please ensure that you have .NET Framework **4.6.1** or later installed on your machine.
 
@@ -31,3 +32,10 @@ This project is a proof-of-concept console application that uses Microsoft Cogni
   </appSettings>
 </configuration>
 ```
+
+## Running the Tests
+In order to run the unit tests you may use the Test Explorer of Visual Studio. However, for the integration tests you will not be able to run them. Only the build pipeline of the master branch will be able to do so.
+
+- In Visual Studio click **Test**
+- Click **Windows**
+- Click **Test Explorer**
