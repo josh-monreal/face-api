@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace FA.Business.Validators
 {
-    class PersonGroupValidator : AbstractValidator<PersonGroupDto>
+    public class PersonGroupValidator : AbstractValidator<PersonGroupDto>
     {
         public PersonGroupValidator()
         {
