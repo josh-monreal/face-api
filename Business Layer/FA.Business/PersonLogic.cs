@@ -3,6 +3,7 @@ using FA.Business.Core;
 using FA.Business.DTOs;
 using FA.Business.Models;
 using System;
+using FA.Business.Validators;
 
 namespace FA.Business
 {
@@ -22,17 +23,24 @@ namespace FA.Business
         {
             try
             {
+                if (dto == null)
+                    throw new ArgumentNullException("dto", "The object that you provided cannot be null.");
+
                 if (string.IsNullOrWhiteSpace(personGroupId))
                     throw new ArgumentNullException("personGroupId", "The person group ID that you entered is invalid");
 
-                if (string.IsNullOrWhiteSpace(dto.Name))
-                    throw new ArgumentNullException("personName", "The person name that you entered is invalid");
+                var validationResults = new PersonValidator().Validate(dto);
 
-                var result = _personAPI.Create(personGroupId, dto.Name)
-                    .Result;
+                if (validationResults.IsValid)
+                {
+                    var result = _personAPI.Create(personGroupId, dto.Name)
+                        .Result;
 
-                return _responseHelper.CreateResponse<PersonDto>(
-                    result, $"'{ dto.Name }' has been successfully created in the '{ personGroupId }' person-group.");
+                    return _responseHelper.CreateResponse<PersonDto>(
+                        result, $"'{ dto.Name }' has been successfully created in the '{ personGroupId }' person-group.");
+                }
+                else
+                    throw new InvalidOperationException("The person name that you have provided is invalid.");
             }
 
             catch (AggregateException aex)
