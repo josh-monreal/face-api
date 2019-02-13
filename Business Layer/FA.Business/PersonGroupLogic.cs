@@ -24,8 +24,7 @@ namespace FA.Business
             if (dto == null)
                 throw new ArgumentNullException("dto", "The object that you provided cannot be null.");
 
-            PersonGroupValidator validator = new PersonGroupValidator();
-            var validationResults = validator.Validate(dto);
+            var validationResults = new PersonGroupValidator().Validate(dto);
 
             if (validationResults.IsValid)
             {
