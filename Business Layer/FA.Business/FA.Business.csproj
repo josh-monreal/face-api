@@ -82,6 +82,7 @@
     <Compile Include="Utilities\EnumerationExtensions.cs" />
     <Compile Include="Utilities\ResponseHelper.cs" />
     <Compile Include="Validators\PersonGroupValidator.cs" />
+    <Compile Include="Validators\PersonValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\External Layer\FA.External\FA.External.csproj">
